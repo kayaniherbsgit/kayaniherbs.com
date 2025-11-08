@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+body,
+.progress-wrapper {
+  font-family: "Inter", sans-serif;
+  background: #0f2e2b;
+  margin: 0;
+  padding: 0;
+}
+
+.progress-scroll,
+.profile-scroll,
+.lesson-scroll,
+.content-scroll {
+  overflow-y: auto;
+  height: calc(100vh - 70px); /* subtract bottom nav height */
+  padding-bottom: 80px; /* give breathing room above bottom nav */
+  scrollbar-width: none; /* hide scroll bar */
+}
+
+.progress-scroll::-webkit-scrollbar,
+.profile-scroll::-webkit-scrollbar,
+.lesson-scroll::-webkit-scrollbar,
+.content-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* === CONTAINER === */
+.progress-container {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* === HEADER === */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+}
+
+.progress-header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.menu-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-btn:hover {
+  background: #f4f4f4;
+}
+
+/* === OVERVIEW CARD === */
+.overview-section {
+  padding: 14px 20px;
+}
+
+.overview-card {
+  background: linear-gradient(135deg, #009641, #147d3a);
+  color: white;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.overview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.overview-sub {
+  font-size: 10px;
+  opacity: 0.85;
+  margin: 0 0 3px;
+}
+
+.overview-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.trophy-circle {
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trophy-circle svg {
+  font-size: 16px;
+  color: white;
+}
+
+.overview-stats {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 8px;
+}
+
+.stat-label {
+  font-size: 9px;
+  opacity: 0.85;
+  margin-bottom: 1px;
+}
+
+.stat-value {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* === SECTION === */
+.section {
+  padding: 10px 20px;
+}
+
+.section h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+/* === CHART === */
+.chart-box {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  height: 180px;
+  overflow: hidden;
+}
+
+/* === CATEGORY CARDS === */
+.category-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.category-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.category-top .left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.red-bg {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.purple-bg {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.percent {
+  color: #009641;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.progress-track {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #009641;
+  border-radius: 4px;
+}
+
+/* === ACHIEVEMENTS === */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.achievement {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.achievement.active {
+  border: 2px solid #009641;
+}
+
+.ach-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  margin: 0 auto 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+.green-bg {
+  background: #009641;
+  color: white;
+}
+
+.amber-bg {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.blue-bg {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.title {
+  font-size: 9px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* === BOTTOM NAV === */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #6b7280;
+  font-size: 11px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-item svg {
+  font-size: 18px;
+}
+
+.nav-item.active {
+  color: #009641;
+}
+
+.progress-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 100px; /* space for bottom nav */
+}
+
+.bottom-space {
+  height: 90px;
+}

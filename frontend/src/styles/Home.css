@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body,
+.home-wrapper {
+  font-family: 'Inter', sans-serif !important;
+  background: #0f2e2b;
+  margin: 0;
+  padding: 0;
+}
+
+.progress-scroll,
+.profile-scroll,
+.lesson-scroll,
+.content-scroll {
+  overflow-y: auto;
+  height: calc(100vh - 70px); /* subtract bottom nav height */
+  padding-bottom: 80px; /* give breathing room above bottom nav */
+  scrollbar-width: none; /* hide scroll bar */
+}
+
+.progress-scroll::-webkit-scrollbar,
+.profile-scroll::-webkit-scrollbar,
+.lesson-scroll::-webkit-scrollbar,
+.content-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* === CONTAINER === */
+.home-container {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 90px;
+}
+
+/* === HEADER === */
+.header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  z-index: 10;
+  transition: all 0.25s ease-in-out;
+}
+
+.header.scrolled {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  width: 38px;
+  height: 38px;
+  background: #009641;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+.logo-icon {
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.app-title {
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.bell-btn {
+  border: none;
+  background: transparent;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.bell-btn:hover {
+  background: #f4f4f4;
+}
+
+/* === HERO === */
+.hero {
+  padding: 16px 20px;
+}
+
+.hero-box {
+  position: relative;
+  height: 160px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3), transparent);
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+}
+
+.hero-text h2 {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hero-text p {
+  color: #fff;
+  font-size: 13px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* === STATS === */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 20px;
+}
+
+.stat {
+  flex: 1;
+  border-radius: 10px;
+  text-align: center;
+  padding: 12px 6px;
+}
+
+.stat h3 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.stat p {
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+.completed {
+  background: linear-gradient(135deg, #009641, #147d3a);
+  color: white;
+}
+
+.progress {
+  border: 1.8px solid #009641;
+}
+
+.total {
+  background: #f4f4f4;
+}
+
+/* === SECTIONS === */
+.section {
+  padding: 14px 20px;
+}
+
+.section h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* === LESSON CARD === */
+.lesson-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.thumb img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.lesson-info h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.lesson-info p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 3px 0;
+}
+
+.progress-track {
+  width: 100%;
+  height: 5px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #009641;
+  border-radius: 3px;
+}
+
+.progress-text {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.btn-primary {
+  width: 100%;
+  margin-top: 10px;
+  background: #009641;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 9px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s;
+}
+
+.btn-primary:hover {
+  background: #147d3a;
+}
+
+/* === CATEGORIES === */
+.categories {
+  display: flex;
+  gap: 10px;
+}
+
+.category {
+  flex: 1;
+  border-radius: 10px;
+  text-align: center;
+  padding: 14px 8px;
+}
+
+.category.green {
+  background: linear-gradient(135deg, #009641, #147d3a);
+  color: white;
+}
+
+.category.white {
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+.category h5 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.category p {
+  font-size: 11px;
+  margin: 0;
+}
+
+.icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.green-icon {
+  color: #009641;
+}
+
+/* === RECENT LESSONS === */
+.recent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.icon-bg {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.green-bg {
+  background: #ecfdf5;
+}
+
+.amber-bg {
+  background: #fff7ed;
+}
+
+.green {
+  color: #009641;
+}
+
+.amber {
+  color: #d97706;
+}
+
+.recent-card h5 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.recent-card p {
+  font-size: 11px;
+  color: #6b7280;
+  margin: 2px 0 0;
+}
+
+/* === BOTTOM NAV === */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #6b7280;
+  font-size: 11px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-item svg {
+  font-size: 18px;
+}
+
+.nav-item.active {
+  color: #009641;
+}
+
+/* === HEADER ANIMATION === */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.4s ease-in-out;
+}
+
+.header-left.centered {
+  justify-content: center;
+  width: 100%;
+  transform: translateX(0);
+}
+
+.app-title.slide-out {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.app-title.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}

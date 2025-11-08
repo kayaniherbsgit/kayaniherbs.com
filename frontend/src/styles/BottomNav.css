@@ -1,0 +1,77 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-item svg {
+  font-size: 22px;
+  margin-bottom: 3px;
+}
+
+.nav-item.active {
+  color: #009641; /* Kayani green */
+  font-weight: 600;
+}
+
+.nav-item.active svg {
+  transform: scale(1.1);
+}
+
+.nav-item:hover {
+  color: #048547;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    height: 65px;
+  }
+}
+
+/* Keep all your current CSS above */
+
+/* Smooth hover and active motion transitions */
+.nav-item {
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-item svg {
+  transition: transform 0.2s ease;
+}
+
+.nav-item.active svg {
+  transform: scale(1.15);
+}
+
+.nav-item span {
+  font-size: 12px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-item.active span {
+  transform: translateY(-2px);
+  opacity: 1;
+}
