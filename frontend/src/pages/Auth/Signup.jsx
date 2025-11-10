@@ -26,9 +26,7 @@ const Signup = () => {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (event) => {
-      setImage(event.target.result);
-    };
+    reader.onload = (event) => setImage(event.target.result);
     reader.readAsDataURL(file);
   };
 
@@ -48,19 +46,15 @@ const Signup = () => {
         {/* Card */}
         <div className="signup-card">
           <form className="signup-form">
-            
-            {/* Profile Picture */}
+
+            {/* Profile image */}
             <div className="profile-upload">
               <div className="upload-circle">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
+                <input type="file" accept="image/*" onChange={handleImageUpload} />
                 {!image ? (
                   <FaCamera className="camera-icon" />
                 ) : (
-                  <img src={image} alt="Profile" className="uploaded-img" />
+                  <img src={image} className="uploaded-img" alt="profile" />
                 )}
               </div>
               <p>Upload Profile Picture</p>
@@ -147,22 +141,20 @@ const Signup = () => {
               </div>
             </div>
 
-            {/* Button */}
+            {/* Submit */}
             <button className="signup-btn">Sign Up</button>
 
-            {/* Login link */}
+            {/* Already have account */}
             <p className="footer-text">
               Already have an account?
-              <span
-                className="login-link"
-                onClick={() => navigate("/login")}
-              >
+              <span className="login-link" onClick={() => navigate("/login")}>
                 Login
               </span>
             </p>
 
           </form>
         </div>
+
       </div>
     </div>
   );
