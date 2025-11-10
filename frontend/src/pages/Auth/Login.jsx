@@ -10,21 +10,74 @@ import {
   FaApple,
   FaHeadphones,
 } from "react-icons/fa";
+
+import { loginUser } from "../../api/auth";
 import "./AuthStyles/Login.css";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [errorPopup, setErrorPopup] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const showError = (msg) => {
+    setErrorPopup(msg || "Incorrect email or password");
+    setTimeout(() => setErrorPopup(""), 3500);
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    navigate("/home");
+    if (loading) return;
+
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value;
+
+    if (!email || !password) {
+      showError("Please enter email and password");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await loginUser({ email, password });
+
+      // Extra guard
+      if (!res?.data?.token) {
+        showError(res?.data?.message || "Incorrect email or password");
+        return;
+      }
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      navigate("/home");
+    } catch (err) {
+      const msg =
+        err?.response?.data?.message ||
+        (err?.response?.status === 401
+          ? "Incorrect email or password"
+          : "Login failed");
+      showError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="mobile-wrapper">
-      <div className="login-page">
 
+      {/* 🌫️ OVERLAY (blur background) */}
+      {errorPopup && <div className="login-error-overlay"></div>}
+
+      {/* 🔥 MODAL ERROR POPUP */}
+      {errorPopup && (
+        <div className="login-error-popup">
+          <p>{errorPopup}</p>
+        </div>
+      )}
+
+      <div className="login-page">
         {/* Header */}
         <div className="login-header">
           <div className="icon-circle">
@@ -37,13 +90,17 @@ const Login = () => {
         {/* Card */}
         <div className="login-card">
           <form className="login-form" onSubmit={handleLogin}>
-            
             {/* Email */}
             <div>
               <label>Email Address</label>
               <div className="input-wrap">
                 <FaEnvelope className="input-icon" />
-                <input type="email" placeholder="you@example.com" required />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
               </div>
             </div>
 
@@ -54,6 +111,7 @@ const Login = () => {
                 <FaLock className="input-icon" />
                 <input
                   type={showPassword ? "text" : "password"}
+                  name="password"
                   placeholder="Enter your password"
                   required
                 />
@@ -71,16 +129,20 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Remember + Forgot */}
+            {/* Remember */}
             <div className="remember-row">
               <label className="remember-check">
                 <input type="checkbox" />
                 <span>Remember me</span>
               </label>
-              <button className="forgot-btn" type="button">Forgot?</button>
+              <button className="forgot-btn" type="button">
+                Forgot?
+              </button>
             </div>
 
-            <button type="submit" className="signin-btn">Sign In</button>
+            <button type="submit" className="signin-btn" disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
           </form>
 
           {/* Divider */}
@@ -99,7 +161,6 @@ const Login = () => {
             Don’t have an account?
             <span onClick={() => navigate("/signup")}> Sign Up</span>
           </p>
-
         </div>
 
         <p className="footer-note">

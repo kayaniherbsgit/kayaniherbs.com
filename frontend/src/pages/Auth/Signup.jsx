@@ -15,19 +15,50 @@ import {
   FaChevronDown,
 } from "react-icons/fa6";
 
+import { signupUser } from "../../api/auth";
 import "./AuthStyles/Signup.css";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [image, setImage] = useState(null);
+
+  const [form, setForm] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    phone: "",
+    whatsapp: "",
+    region: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => setImage(event.target.result);
-    reader.readAsDataURL(file);
+    setImage(file);
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = new FormData();
+      for (let key in form) data.append(key, form[key]);
+      if (image) data.append("profileImage", image);
+
+      const res = await signupUser(data);
+
+      alert("Account created!");
+      navigate("/login");
+    } catch (err) {
+      alert(err.response?.data?.message || "Signup failed");
+    }
   };
 
   return (
@@ -45,7 +76,7 @@ const Signup = () => {
 
         {/* Card */}
         <div className="signup-card">
-          <form className="signup-form">
+          <form className="signup-form" onSubmit={handleSignup}>
 
             {/* Profile image */}
             <div className="profile-upload">
@@ -54,64 +85,84 @@ const Signup = () => {
                 {!image ? (
                   <FaCamera className="camera-icon" />
                 ) : (
-                  <img src={image} className="uploaded-img" alt="profile" />
+                  <img src={URL.createObjectURL(image)} className="uploaded-img" alt="profile" />
                 )}
               </div>
               <p>Upload Profile Picture</p>
             </div>
 
-            {/* Full Name */}
+            {/* Inputs */}
             <div>
               <label>Full Name</label>
               <div className="input-wrap">
                 <FaUser className="input-icon" />
-                <input type="text" placeholder="Enter full name" />
+                <input
+                  type="text"
+                  name="fullName"
+                  onChange={handleChange}
+                  placeholder="Enter full name"
+                />
               </div>
             </div>
 
-            {/* Username */}
             <div>
               <label>Username</label>
               <div className="input-wrap">
                 <FaAt className="input-icon" />
-                <input type="text" placeholder="Choose username" />
+                <input
+                  type="text"
+                  name="username"
+                  onChange={handleChange}
+                  placeholder="Choose username"
+                />
               </div>
             </div>
 
-            {/* Email */}
             <div>
               <label>Email</label>
               <div className="input-wrap">
                 <FaEnvelope className="input-icon" />
-                <input type="email" placeholder="your@email.com" />
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  placeholder="your@email.com"
+                />
               </div>
             </div>
 
-            {/* Phone */}
             <div>
               <label>Phone Number</label>
               <div className="input-wrap">
                 <FaPhone className="input-icon" />
-                <input type="tel" placeholder="+255 712 345 678" />
+                <input
+                  type="tel"
+                  name="phone"
+                  onChange={handleChange}
+                  placeholder="+255 712 345 678"
+                />
               </div>
             </div>
 
-            {/* WhatsApp */}
             <div>
               <label>WhatsApp Number</label>
               <div className="input-wrap">
                 <FaWhatsapp className="input-icon" />
-                <input type="tel" placeholder="+255 712 345 678" />
+                <input
+                  type="tel"
+                  name="whatsapp"
+                  onChange={handleChange}
+                  placeholder="+255 712 345 678"
+                />
               </div>
             </div>
 
-            {/* Region */}
             <div>
               <label>Select Region</label>
               <div className="input-wrap">
                 <FaLocationDot className="input-icon" />
-                <select>
-                  <option>Choose your region</option>
+                <select name="region" onChange={handleChange}>
+                  <option value="">Choose your region</option>
                   <option>Africa</option>
                   <option>Asia</option>
                   <option>Europe</option>
@@ -123,13 +174,14 @@ const Signup = () => {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label>Password</label>
               <div className="input-wrap">
                 <FaLock className="input-icon" />
                 <input
                   type={showPassword ? "text" : "password"}
+                  name="password"
+                  onChange={handleChange}
                   placeholder="Create password"
                 />
                 <span
@@ -141,10 +193,8 @@ const Signup = () => {
               </div>
             </div>
 
-            {/* Submit */}
-            <button className="signup-btn">Sign Up</button>
+            <button className="signup-btn" type="submit">Sign Up</button>
 
-            {/* Already have account */}
             <p className="footer-text">
               Already have an account?
               <span className="login-link" onClick={() => navigate("/login")}>

@@ -16,17 +16,17 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #009641 0%, #147d3a 100%);
   font-family: "Inter", sans-serif;
-  padding: 28px 18px;     /* reduced from 40px */
+  padding: 28px 18px;
 }
 
 /* HEADER */
 .login-header {
   text-align: center;
-  margin-bottom: 18px;    /* reduced */
+  margin-bottom: 18px;
 }
 
 .icon-circle {
-  width: 70px;            /* reduced size */
+  width: 70px;
   height: 70px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.14);
@@ -39,7 +39,7 @@
 
 .header-icon {
   color: white;
-  font-size: 30px;        /* slightly smaller */
+  font-size: 30px;
 }
 
 .login-header h1 {
@@ -58,7 +58,7 @@
 .login-card {
   background: white;
   border-radius: 22px;
-  padding: 22px 18px;     /* reduced */
+  padding: 22px 18px;
   width: 100%;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
@@ -79,12 +79,12 @@
 
 .input-wrap input {
   width: 100%;
-  height: 46px;           /* reduced from 52px */
+  height: 46px;
   padding-left: 44px;
   padding-right: 44px;
   background: #f8fafc;
   border: 1.5px solid #e2e8f0;
-  border-radius: 14px;    /* reduced slightly */
+  border-radius: 14px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -116,7 +116,7 @@
 .remember-row {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0 14px;     /* tighter */
+  margin: 10px 0 14px;
 }
 
 .remember-check {
@@ -149,7 +149,7 @@
 
 /* DIVIDER */
 .divider {
-  margin: 18px 0;     /* reduced */
+  margin: 18px 0;
   text-align: center;
   position: relative;
 }
@@ -181,7 +181,7 @@
 .social-btn {
   background: #f9fafb;
   border: 1.5px solid #e2e8f0;
-  padding: 12px 0;         /* smaller */
+  padding: 12px 0;
   border-radius: 14px;
   display: flex;
   justify-content: center;
@@ -195,7 +195,7 @@
 /* SIGN UP TEXT */
 .signup-text {
   text-align: center;
-  margin-top: 14px;       /* reduced */
+  margin-top: 14px;
   font-size: 14px;
 }
 
@@ -210,5 +210,97 @@
   text-align: center;
   font-size: 11px;
   color: rgba(255, 255, 255, 0.65);
-  margin-top: 18px;       /* reduced */
+  margin-top: 18px;
+}
+
+/* ====================================================================== */
+/* 🌫️ OVERLAY + MODAL ERROR POPUP (Logout-style) */
+/* ====================================================================== */
+
+.login-error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  z-index: 9998;
+  animation: fadeInOverlay 0.25s ease-out forwards,
+             fadeOutOverlay 0.45s ease-out 2.8s forwards;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOutOverlay {
+  to { opacity: 0; }
+}
+
+/* MODAL */
+
+/* ====================================================================== */
+/* 🌫️ OVERLAY + MODAL ERROR POPUP (Logout-style) */
+/* ====================================================================== */
+
+.login-error-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  z-index: 9998;
+  animation: fadeInOverlay 0.25s ease-out forwards,
+             fadeOutOverlay 0.55s ease-out 2.8s forwards;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOutOverlay {
+  to { opacity: 0; }
+}
+
+/* MODAL POPUP */
+.login-error-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  max-width: 360px;
+  transform: translate(-50%, -50%) scale(0.85);
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 24px 26px;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.22);
+
+  animation: popupShow 0.25s ease-out forwards,
+             popupFadeOut 0.55s ease-out 2.8s forwards;
+}
+
+.login-error-popup p {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #e43434;
+}
+
+@keyframes popupShow {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.65);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes popupFadeOut {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.92);
+  }
 }

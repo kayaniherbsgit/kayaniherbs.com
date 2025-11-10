@@ -1,30 +1,72 @@
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../models/User.js";
+import cloudinary from "cloudinary";
 
-// REGISTER
-export const register = async (req, res) => {
+// CLOUDINARY CONFIG
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// SIGNUP
+export const signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const {
+      fullName,
+      username,
+      email,
+      phone,
+      whatsapp,
+      region,
+      password,
+    } = req.body;
 
-    if (!name || !email || !password)
-      return res.status(400).json({ msg: "All fields are required" });
+    // Basic presence checks
+    if (!fullName || !username || !email || !phone || !region || !password) {
+      return res.status(400).json({ success: false, message: "Missing required fields" });
+    }
 
-    const existing = await User.findOne({ email });
-    if (existing) return res.status(400).json({ msg: "User already exists" });
+    // Uniqueness checks (email + username)
+    const existing = await User.findOne({ $or: [{ email }, { username }] });
+    if (existing) {
+      const which = existing.email === email ? "Email" : "Username";
+      return res.status(409).json({ success: false, message: `${which} already exists` });
+    }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, salt);
+    // Upload image if exists
+    let profileImage = "";
+    if (req.file) {
+      const uploaded = await cloudinary.v2.uploader.upload(req.file.path, {
+        folder: "kayani_users",
+      });
+      profileImage = uploaded.secure_url;
+    }
 
-    const user = await User.create({ name, email, password: hashed });
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    res.status(201).json({
-      token,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role }
+    const user = await User.create({
+      fullName,
+      username,
+      email,
+      phone,
+      whatsapp,
+      region,
+      profileImage,
+      password: hashedPassword,
     });
+
+    // Hide password before sending out
+    const { password: _pw, ...safeUser } = user.toObject();
+
+    return res
+      .status(201)
+      .json({ success: true, message: "Account created successfully", user: safeUser });
   } catch (err) {
-    res.status(500).json({ msg: "Server error", error: err.message });
+    console.error("Signup error:", err);
+    return res.status(500).json({ success: false, message: "Signup error" });
   }
 };
 
@@ -33,29 +75,38 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
+    // Normalize
+    const normalizedEmail = (email || "").trim().toLowerCase();
+    if (!normalizedEmail || !password) {
+      return res.status(400).json({ success: false, message: "Email and password are required" });
+    }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) {
+      return res.status(401).json({ success: false, message: "Invalid email or password" });
+    }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      return res.status(401).json({ success: false, message: "Invalid email or password" });
+    }
 
-    res.json({
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET || "dev-fallback-secret",
+      { expiresIn: "7d" }
+    );
+
+    const { password: _pw, ...safeUser } = user.toObject();
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
       token,
-      user: { id: user._id, name: user.name, email: user.email, role: user.role }
+      user: safeUser,
     });
   } catch (err) {
-    res.status(500).json({ msg: "Server error", error: err.message });
-  }
-};
-
-// PROFILE
-export const getProfile = async (req, res) => {
-  try {
-    const user = await User.findById(req.userId).select("-password");
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ msg: "Server error" });
+    console.error("Login error:", err);
+    return res.status(500).json({ success: false, message: "Login error" });
   }
 };
