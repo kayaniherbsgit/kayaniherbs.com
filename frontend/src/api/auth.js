@@ -12,6 +12,7 @@ export const signupUser = async (formData) => {
 };
 
 // LOGIN
-export const loginUser = async (data) => {
-  return await API.post("/login", data);
-};
+export const loginUser = (data) => 
+  API.post("/login", data, {
+    headers: { "Content-Type": "application/json" }
+  });

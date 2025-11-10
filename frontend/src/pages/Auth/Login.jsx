@@ -43,10 +43,11 @@ const Login = () => {
       const res = await loginUser({ email, password });
 
       // Extra guard
-      if (!res?.data?.token) {
-        showError(res?.data?.message || "Incorrect email or password");
-        return;
-      }
+if (!res.data.success) {
+    showError(res.data.message);
+    return;
+}
+
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
