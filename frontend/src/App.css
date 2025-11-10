@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+/* MOBILE APP WRAPPER */
+.mobile-wrapper {
+  max-width: 420px;       /* perfect for all phones */
+  margin: 0 auto;
+  background: #fff;
+  min-height: 100vh;
+  position: relative;
+}
