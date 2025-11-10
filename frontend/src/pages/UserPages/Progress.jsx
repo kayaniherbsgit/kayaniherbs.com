@@ -9,8 +9,11 @@ import {
   FaStar,
   FaMedal,
 } from "react-icons/fa";
-import "../styles/Progress.css";
-import BottomNav from "../components/BottomNav";
+
+import "./userStyles/Progress.css";
+import BottomNav from "../../components/BottomNav";
+import Header from "../../components/Header";
+
 
 const Progress = () => {
   useEffect(() => {
@@ -39,17 +42,15 @@ const Progress = () => {
         plot_bgcolor: "#ffffff",
         paper_bgcolor: "#ffffff",
         xaxis: { showgrid: false },
-        yaxis: { showgrid: true, gridcolor: "#f3f4f6", title: "Hours" },
+        yaxis: { gridcolor: "#f3f4f6", title: "Hours" },
         showlegend: false,
       };
 
-      const config = {
+      Plotly.newPlot("weekly-chart", data, layout, {
         responsive: true,
         displayModeBar: false,
-      };
-
-      Plotly.newPlot("weekly-chart", data, layout, config);
-    } catch (e) {
+      });
+    } catch {
       document.getElementById("weekly-chart").innerHTML =
         '<div class="chart-error">Chart unavailable</div>';
     }
@@ -58,16 +59,15 @@ const Progress = () => {
   return (
     <div className="progress-wrapper">
       <div className="progress-container">
-        {/* Header */}
-        <header className="progress-header">
-          <h1>My Progress</h1>
-          <button className="menu-btn">
-            <FaEllipsisV />
-          </button>
-        </header>
+        
+        {/* HEADER */}
+<Header title="Kayani Men" />
 
-        {/* Scrollable Content */}
+
+        {/* CONTENT */}
         <main className="progress-scroll">
+
+          {/* OVERVIEW */}
           <section className="overview-section">
             <div className="overview-card">
               <div className="overview-top">
@@ -79,6 +79,7 @@ const Progress = () => {
                   <FaTrophy />
                 </div>
               </div>
+
               <div className="overview-stats">
                 <div>
                   <p className="stat-label">Streak</p>
@@ -96,11 +97,13 @@ const Progress = () => {
             </div>
           </section>
 
+          {/* WEEKLY CHART */}
           <section className="section">
             <h3>Weekly Activity</h3>
             <div id="weekly-chart" className="chart-box"></div>
           </section>
 
+          {/* CATEGORY CARDS */}
           <section className="section">
             <h3>Category Progress</h3>
 
@@ -117,6 +120,7 @@ const Progress = () => {
                 </div>
                 <span className="percent">53%</span>
               </div>
+
               <div className="progress-track">
                 <div className="progress-fill" style={{ width: "53%" }}></div>
               </div>
@@ -135,40 +139,47 @@ const Progress = () => {
                 </div>
                 <span className="percent">33%</span>
               </div>
+
               <div className="progress-track">
                 <div className="progress-fill" style={{ width: "33%" }}></div>
               </div>
             </div>
           </section>
 
+          {/* ACHIEVEMENTS */}
           <section className="section achievements">
             <h3>Recent Achievements</h3>
+
             <div className="achievements-grid">
-              <div className="achievement active">
+
+              <div className="achievement">
                 <div className="ach-icon green-bg">
                   <FaFire />
                 </div>
                 <p className="title">7 Day Streak</p>
               </div>
+
               <div className="achievement">
                 <div className="ach-icon amber-bg">
                   <FaStar />
                 </div>
                 <p className="title">Fast Learner</p>
               </div>
+
               <div className="achievement">
                 <div className="ach-icon blue-bg">
                   <FaMedal />
                 </div>
                 <p className="title">First 10</p>
               </div>
+
             </div>
           </section>
 
           <div className="bottom-space" />
+
         </main>
 
-        {/* Bottom Navigation */}
         <BottomNav />
       </div>
     </div>

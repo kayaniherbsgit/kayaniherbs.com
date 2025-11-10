@@ -1,0 +1,247 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+body,
+.progress-wrapper {
+  font-family: "Inter", sans-serif;
+  background: #f9fafb;
+  margin: 0;
+  padding: 0;
+}
+
+/* SCROLL */
+.progress-scroll {
+  overflow-y: auto;
+  height: calc(100vh - 70px);
+  padding-bottom: 100px;
+  scrollbar-width: none;
+}
+.progress-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* CONTAINER */
+.progress-container {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.progress-header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* OVERVIEW — NOW PROFILE STYLE */
+.overview-section {
+  padding: 16px 20px;
+}
+.overview-card {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  padding: 18px;
+}
+.overview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.overview-sub {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+.overview-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 2px 0 8px;
+}
+.trophy-circle {
+  width: 48px;
+  height: 48px;
+  background: #ecfdf5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trophy-circle svg {
+  color: #009641;
+  font-size: 18px;
+}
+
+.overview-stats {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 12px;
+  padding-top: 10px;
+}
+.stat-label {
+  font-size: 11px;
+  color: #6b7280;
+}
+.stat-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* SECTIONS */
+.section {
+  padding: 16px 20px;
+}
+.section h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+/* CHART BOX */
+.chart-box {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  height: 180px;
+  overflow: hidden;
+}
+
+/* CATEGORY CARDS — PROFILE STYLE */
+.category-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.category-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-top .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.red-bg {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.purple-bg {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.category-card h4 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 600;
+  color: #111827;
+}
+.category-card p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 2px 0 0;
+}
+
+.percent {
+  font-size: 12px;
+  color: #009641;
+  font-weight: 600;
+}
+
+.progress-track {
+  height: 5px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+.progress-fill {
+  height: 100%;
+  background: #009641;
+  border-radius: 3px;
+}
+
+/* ACHIEVEMENTS — PROFILE STYLE */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.achievement {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.ach-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  margin: 0 auto 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.green-bg {
+  background: #ecfdf5;
+  color: #009641;
+}
+.amber-bg {
+  background: #fef7c3;
+  color: #ca8a04;
+}
+.blue-bg {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* SPACER */
+.bottom-space {
+  height: 80px;
+}

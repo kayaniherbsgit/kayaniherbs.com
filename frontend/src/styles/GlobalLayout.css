@@ -1,0 +1,87 @@
+/* === GLOBAL LAYOUT STANDARDIZATION === */
+:root {
+  --kayani-green: #009641;
+  --kayani-dark: #0f2e2b;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --radius-base: 14px;
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--kayani-dark);
+  color: var(--text-dark);
+}
+
+/* App container */
+.page-container {
+  background: white;
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scroll area */
+.scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 90px;
+  scrollbar-width: none;
+}
+.scroll-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Section wrapper */
+.section {
+  padding: 14px 20px;
+}
+
+/* Titles */
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+p, span { font-size: 12px; color: var(--text-light); }
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  background: var(--kayani-green);
+  color: white;
+  border: none;
+  border-radius: var(--radius-base);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+.btn-primary:hover {
+  background: #007a34;
+}
+
+/* Card style */
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-soft);
+  padding: 12px 14px;
+}
+
+/* Bottom padding for nav */
+.bottom-space {
+  height: 90px;
+}

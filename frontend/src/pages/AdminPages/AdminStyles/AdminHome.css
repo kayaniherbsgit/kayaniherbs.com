@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+.admin-page {
+  font-family: "Inter", sans-serif;
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f9fafb;
+  padding-bottom: 90px;
+}
+
+/* HEADER */
+.admin-header {
+  background: linear-gradient(90deg, #009641, #147d3a);
+  padding: 24px 20px 70px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.admin-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+.admin-header p {
+  font-size: 11px;
+  opacity: .9;
+}
+
+.admin-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* STATS */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  margin-top: -40px;
+  padding: 0 20px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 6px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+}
+
+.stat-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.green-bg { background: #ecfdf5; color: #009641; }
+.blue-bg { background: #eff6ff; color: #2563eb; }
+.amber-bg { background: #fef3c7; color: #d97706; }
+
+.stat-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+.stat-card p {
+  font-size: 10px;
+  color: #6b7280;
+}
+
+/* SECTIONS */
+.section-block {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.section-block h2 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+/* ACTION ITEMS */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-item {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+}
+
+.action-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-bg { background: linear-gradient(135deg,#009641,#147d3a); color: white; }
+.blue-light { background: #eff6ff; color: #2563eb; }
+.amber-light { background: #fef3c7; color: #d97706; }
+.purple-light { background: #f3e8ff; color: #9333ea; }
+.gray-light { background: #e5e7eb; color: #374151; }
+.green-light { background: #ecfdf5; color: #009641; }
+
+.action-info h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+.action-info p {
+  font-size: 10px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.arrow {
+  margin-left: auto;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* RECENT ACTIVITY */
+.activity-box {
+  background: white;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+}
+
+.activity-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.activity-info h4 {
+  font-size: 11px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+.activity-info p {
+  font-size: 9px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+/* BOTTOM NAV */
+.admin-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.nav-item {
+  font-size: 11px;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-item svg {
+  font-size: 18px;
+}
+.nav-item.active { color: #009641; }
+.nav-item.logout { color: #dc2626; }
+
+.admin-bottom-space {
+  height: 90px;
+}

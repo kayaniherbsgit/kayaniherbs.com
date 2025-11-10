@@ -9,19 +9,18 @@ import {
   FaCheck,
   FaClock,
 } from "react-icons/fa";
-import "../styles/Home.css";
-import BottomNav from "../components/BottomNav";
+
+import "./userStyles/Home.css";
+import BottomNav from "../../components/BottomNav";
+import Header from "../../components/Header";
+
 
 const Home = () => {
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 40) setIsScrolled(true);
-      else setIsScrolled(false);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,26 +28,15 @@ const Home = () => {
   return (
     <div className="home-wrapper">
       <div className="home-container">
-        {/* Header */}
-        <header id="header" className={`header ${isScrolled ? "scrolled" : ""}`}>
-          <div className={`header-left ${isScrolled ? "centered" : ""}`}>
-            <div className="header-logo">
-              <FaGraduationCap className="logo-icon" />
-            </div>
-            <h1
-              id="header-title"
-              className={`app-title ${isScrolled ? "slide-out" : "slide-in"}`}
-            >
-              Kayani Men
-            </h1>
-          </div>
-          <button className="bell-btn">
-            <FaBell />
-          </button>
-        </header>
+
+        {/* Header (unchanged) */}
+<Header title="Kayani Men" />
+
 
         {/* Scrollable Content */}
         <main className="content-scroll">
+
+          {/* HERO */}
           <section className="hero">
             <div className="hero-box">
               <img
@@ -64,23 +52,28 @@ const Home = () => {
             </div>
           </section>
 
+          {/* STATS */}
           <section className="stats">
             <div className="stat completed">
               <h3>12</h3>
               <p>Completed</p>
             </div>
+
             <div className="stat progress">
               <h3>5</h3>
               <p>In Progress</p>
             </div>
+
             <div className="stat total">
               <h3>27</h3>
               <p>Total Lessons</p>
             </div>
           </section>
 
+          {/* CONTINUE LEARNING */}
           <section className="section">
             <h4>Continue Learning</h4>
+
             <div className="lesson-card">
               <div className="thumb">
                 <img
@@ -88,20 +81,24 @@ const Home = () => {
                   alt="lesson"
                 />
               </div>
+
               <div className="lesson-info">
                 <h5>Hatua Ya Malengo</h5>
                 <p>Lesson 2 of 27</p>
+
                 <div className="progress-track">
                   <div className="progress-fill" style={{ width: "35%" }} />
                 </div>
                 <span className="progress-text">35% Complete</span>
               </div>
             </div>
+
             <button className="btn-primary" onClick={() => navigate("/lessons")}>
               <FaPlay /> Continue Lesson
             </button>
           </section>
 
+          {/* CATEGORIES */}
           <section className="section">
             <h4>Categories</h4>
             <div className="categories">
@@ -110,6 +107,7 @@ const Home = () => {
                 <h5>Relationships</h5>
                 <p>15 Lessons</p>
               </div>
+
               <div className="category white">
                 <FaBrain className="icon green-icon" />
                 <h5>Mindset</h5>
@@ -118,8 +116,10 @@ const Home = () => {
             </div>
           </section>
 
+          {/* RECENT */}
           <section className="section">
             <h4>Recent Lessons</h4>
+
             <div className="recent">
               <div className="recent-card">
                 <div className="icon-bg green-bg">
@@ -146,7 +146,6 @@ const Home = () => {
           <div className="bottom-space" />
         </main>
 
-        {/* Bottom Navigation */}
         <BottomNav />
       </div>
     </div>

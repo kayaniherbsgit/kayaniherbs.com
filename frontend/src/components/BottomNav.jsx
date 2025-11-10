@@ -9,7 +9,7 @@ const BottomNav = () => {
   const location = useLocation();
 
   const tabs = [
-    { path: "/", label: "Home", icon: <FaHome /> },
+    { path: "/home", label: "Home", icon: <FaHome /> },   // ✅ FIXED
     { path: "/lessons", label: "Lessons", icon: <FaBookOpen /> },
     { path: "/progress", label: "Progress", icon: <FaChartLine /> },
     { path: "/profile", label: "Profile", icon: <FaUser /> },
@@ -18,7 +18,10 @@ const BottomNav = () => {
   return (
     <nav className="bottom-nav">
       {tabs.map((tab) => {
-        const isActive = location.pathname === tab.path;
+        const isActive =
+          location.pathname === tab.path ||
+          (tab.path === "/home" && location.pathname === "/");
+
         return (
           <motion.button
             key={tab.path}

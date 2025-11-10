@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;        /* GLOBAL FIX to prevent overflow */
+}
+
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #009641 0%, #147d3a 100%);
+  font-family: "Inter", sans-serif;
+  padding: 40px 20px;
+  max-width: 420px;
+  margin: auto;
+}
+
+/* HEADER */
+.login-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.icon-circle {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.header-icon {
+  color: white;
+  font-size: 35px;
+}
+
+.login-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.login-header p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* CARD */
+.login-card {
+  background: white;
+  border-radius: 28px;
+  padding: 32px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;               /* critical fix for input overflow */
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* FORM */
+.login-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;               /* secondary safety fix */
+}
+
+/* *************** PERFECT INPUTS (FIXED) *************** */
+.input-wrap input {
+  width: 100%;
+  height: 52px;
+  padding-left: 48px;
+  padding-right: 48px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 15px;
+  color: #111827;
+  outline: none;
+  transition: 0.2s ease;
+  display: block;
+}
+
+.input-wrap input::placeholder {
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.input-wrap input:focus {
+  border-color: #009641;
+  box-shadow: 0 0 0 3px rgba(0, 150, 65, 0.25);
+}
+
+/* Icons */
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 17px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+}
+
+.eye-icon {
+  font-size: 18px;
+  color: #9ca3af;
+}
+
+/* REMEMBER + FORGOT */
+.remember-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.remember-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.forgot-btn {
+  background: none;
+  border: none;
+  color: #009641;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* SIGN IN BUTTON */
+.signin-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #009641, #147d3a);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 15px 0;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 18px rgba(0, 150, 65, 0.3);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.signin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0, 150, 65, 0.35);
+}
+
+/* DIVIDER */
+.divider {
+  margin: 26px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.divider span {
+  background: white;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: #e5e7eb;
+  z-index: -1;
+}
+
+/* SOCIAL BUTTONS */
+.social-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.social-btn {
+  background: #f9fafb;
+  border: 1.5px solid #e2e8f0;
+  padding: 14px 0;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.google {
+  color: #db4437;
+  font-size: 22px;
+}
+
+.facebook {
+  color: #1877f2;
+  font-size: 22px;
+}
+
+.apple {
+  color: #000;
+  font-size: 24px;
+}
+
+/* SIGNUP TEXT */
+.signup-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.signup-text span {
+  color: #009641;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.footer-note {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 26px;
+}

@@ -257,3 +257,84 @@ body,
 .bottom-space {
   height: 60px;
 }
+
+/* Overlay */
+.logout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Popup box */
+.logout-popup {
+  background: white;
+  width: 85%;
+  max-width: 320px;
+  padding: 22px;
+  border-radius: 16px;
+  text-align: center;
+  animation: popupIntro 0.25s ease-out;
+}
+
+.logout-popup h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.logout-popup p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Buttons row */
+.popup-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* Cancel */
+.cancel-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: #e5e7eb;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Confirm logout */
+.confirm-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: #009641;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Popup animation */
+@keyframes popupIntro {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaCog,
   FaCrown,
@@ -13,10 +13,21 @@ import {
   FaUser,
   FaChevronRight,
 } from "react-icons/fa";
-import "../styles/Profile.css";
-import BottomNav from "../components/BottomNav";
+import "./userStyles/Profile.css";
+import BottomNav from "../../components/BottomNav";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <div className="profile-page">
       {/* Header */}
@@ -135,10 +146,36 @@ const Profile = () => {
         </div>
       </section>
 
-      {/* Logout */}
-      <button className="logout-btn">
+      {/* Logout Button */}
+      <button
+        className="logout-btn"
+        onClick={() => setShowLogoutPopup(true)}
+      >
         <FaSignOutAlt /> Log Out
       </button>
+
+      {/* LOGOUT POPUP */}
+      {showLogoutPopup && (
+        <div className="logout-overlay">
+          <div className="logout-popup">
+            <h3>Log Out?</h3>
+            <p>You’re about to exit your account.</p>
+
+            <div className="popup-buttons">
+              <button
+                className="cancel-btn"
+                onClick={() => setShowLogoutPopup(false)}
+              >
+                Cancel
+              </button>
+
+              <button className="confirm-btn" onClick={handleLogout}>
+                Yes, Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="bottom-space"></div>
       <BottomNav />

@@ -19,8 +19,10 @@ import {
   FaStickyNote,
   FaPlus,
 } from "react-icons/fa";
-import "../styles/Lessons.css";
-import BottomNav from "../components/BottomNav";
+import "./userStyles/Lessons.css";
+import BottomNav from "../../components/BottomNav";
+import Header from "../../components/Header";
+
 
 const Lessons = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,22 +37,9 @@ const Lessons = () => {
     <div className="lesson-wrapper">
       <div className="lesson-container">
         {/* Header */}
-        <header id="header" className={`header ${isScrolled ? "scrolled" : ""}`}>
-          <div className={`header-left ${isScrolled ? "centered" : ""}`}>
-            <div className="header-logo">
-              <FaGraduationCap className="logo-icon" />
-            </div>
-            <h1
-              id="header-title"
-              className={`app-title ${isScrolled ? "slide-out" : "slide-in"}`}
-            >
-              Kayani Men
-            </h1>
-          </div>
-          <button className="bell-btn">
-            <FaBell />
-          </button>
-        </header>
+<Header title="Kayani Men" />
+
+
 
         {/* Scrollable Content */}
         <main className="lesson-scroll">
