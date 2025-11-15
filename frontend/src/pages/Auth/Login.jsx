@@ -10,7 +10,6 @@ import {
   FaApple,
   FaHeadphones,
 } from "react-icons/fa";
-
 import { loginUser } from "../../api/auth";
 import "./AuthStyles/Login.css";
 
@@ -20,11 +19,13 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // 🔔 Error modal logic
   const showError = (msg) => {
     setErrorPopup(msg || "Incorrect email or password");
-    setTimeout(() => setErrorPopup(""), 3500);
+    setTimeout(() => setErrorPopup(""), 3000);
   };
 
+  // 🔐 Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     if (loading) return;
@@ -39,20 +40,15 @@ const Login = () => {
 
     try {
       setLoading(true);
-
       const res = await loginUser({ email, password });
 
-      // Extra guard
-if (!res.data.success) {
-    showError(res.data.message);
-    return;
-}
-
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      navigate("/home");
+      if (res?.data?.success && res?.data?.token) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("/home");
+      } else {
+        showError(res?.data?.message || "Incorrect email or password");
+      }
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -67,18 +63,17 @@ if (!res.data.success) {
 
   return (
     <div className="mobile-wrapper">
-
-      {/* 🌫️ OVERLAY (blur background) */}
+      {/* 🌫️ Blur overlay */}
       {errorPopup && <div className="login-error-overlay"></div>}
 
-      {/* 🔥 MODAL ERROR POPUP */}
+      {/* ⚠️ Error modal */}
       {errorPopup && (
         <div className="login-error-popup">
           <p>{errorPopup}</p>
         </div>
       )}
 
-      <div className="login-page">
+      <div className={`login-page ${errorPopup ? "blurred" : ""}`}>
         {/* Header */}
         <div className="login-header">
           <div className="icon-circle">
@@ -151,11 +146,17 @@ if (!res.data.success) {
             <span>Or continue with</span>
           </div>
 
-          {/* Social Login */}
+          {/* Social login */}
           <div className="social-row">
-            <button className="social-btn"><FaGoogle className="google" /></button>
-            <button className="social-btn"><FaFacebook className="facebook" /></button>
-            <button className="social-btn"><FaApple className="apple" /></button>
+            <button className="social-btn">
+              <FaGoogle className="google" />
+            </button>
+            <button className="social-btn">
+              <FaFacebook className="facebook" />
+            </button>
+            <button className="social-btn">
+              <FaApple className="apple" />
+            </button>
           </div>
 
           <p className="signup-text">
