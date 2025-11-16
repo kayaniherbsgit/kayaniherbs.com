@@ -11,6 +11,7 @@ import {
   FaHeadphones,
 } from "react-icons/fa";
 import { loginUser } from "../../api/auth";
+import { useAuth } from "../../context/AuthContext";  // ⭐ NEW
 import "./AuthStyles/Login.css";
 
 const Login = () => {
@@ -18,6 +19,8 @@ const Login = () => {
   const [errorPopup, setErrorPopup] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const { login } = useAuth();   // ⭐ AUTH CONTEXT FUNCTION
 
   // 🔔 Error modal logic
   const showError = (msg) => {
@@ -43,8 +46,10 @@ const Login = () => {
       const res = await loginUser({ email, password });
 
       if (res?.data?.success && res?.data?.token) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        // ⭐ Use context login to trigger re-render
+        login(res.data.token, res.data.user);
+
+        // ⭐ Navigate IMMEDIATELY after state updates
         navigate("/home");
       } else {
         showError(res?.data?.message || "Incorrect email or password");
@@ -86,6 +91,7 @@ const Login = () => {
         {/* Card */}
         <div className="login-card">
           <form className="login-form" onSubmit={handleLogin}>
+            
             {/* Email */}
             <div>
               <label>Email Address</label>

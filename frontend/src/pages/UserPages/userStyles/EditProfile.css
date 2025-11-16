@@ -1,0 +1,207 @@
+/* -------------------------------------------
+   GLOBAL PAGE WRAPPER
+------------------------------------------- */
+.profile-page {
+  background: #ffffff;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* -------------------------------------------
+   HEADER
+------------------------------------------- */
+.profile-header {
+  background: linear-gradient(135deg, #009641, #147d3a);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.profile-header h1 {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/* -------------------------------------------
+   PROFILE IMAGE
+------------------------------------------- */
+.edit-profile-photo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.edit-photo-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.edit-photo-container img {
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  object-fit: cover;
+  border: 4px solid #009641;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* camera icon */
+.camera-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #009641;
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.camera-button:hover {
+  background: #147d3a;
+}
+
+.camera-button svg {
+  color: white;
+  font-size: 17px;
+}
+
+.tap-note {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 10px;
+}
+
+/* -------------------------------------------
+   INPUT GROUPS
+------------------------------------------- */
+.form-section {
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.field-group {
+  margin-bottom: 20px;
+}
+
+.field-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* input + pen icon wrapper */
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+  width: 100%;
+  padding: 13px 16px;
+  padding-right: 45px;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  font-size: 15px;
+  background: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+  border-color: #009641;
+  box-shadow: 0 0 0 2px rgba(0, 150, 65, 0.25);
+}
+
+/* pen icon */
+.edit-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #009641;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.edit-icon:hover {
+  opacity: 0.6;
+}
+
+/* -------------------------------------------
+   BUTTONS
+------------------------------------------- */
+.save-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #009641, #147d3a);
+  padding: 14px;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  opacity: 0.85;
+}
+
+.cancel-btn {
+  width: 100%;
+  background: white;
+  padding: 14px;
+  border: 2px solid #d1d5db;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #444;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #f8f8f8;
+}
+
+/* -------------------------------------------
+   SUCCESS TOAST
+------------------------------------------- */
+.success-toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  z-index: 200;
+  animation: fadeInOut 2s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+}

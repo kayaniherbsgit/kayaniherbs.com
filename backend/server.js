@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -22,6 +23,9 @@ app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {
   res.send("Kayani Herbs Backend Live");
 });
+
+app.use("/api/users", userRoutes);
+
 
 // MongoDB
 mongoose

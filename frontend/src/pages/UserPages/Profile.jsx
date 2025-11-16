@@ -10,21 +10,21 @@ import {
   FaQuestionCircle,
   FaInfoCircle,
   FaSignOutAlt,
-  FaUser,
   FaChevronRight,
 } from "react-icons/fa";
 import "./userStyles/Profile.css";
 import BottomNav from "../../components/BottomNav";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   const handleLogout = () => {
-    localStorage.clear();
-    sessionStorage.clear();
+    logout();
     navigate("/login");
   };
 
@@ -42,15 +42,21 @@ const Profile = () => {
       <div className="profile-section">
         <div className="profile-card">
           <div className="profile-pic">
-            <img src="https://i.pravatar.cc/150?img=12" alt="User" />
-            <div className="camera-icon">
-              <FaUser />
-            </div>
+            <img
+              src={
+                user?.profileImage && user.profileImage !== ""
+                  ? user.profileImage
+                  : "https://i.pravatar.cc/150?u=default"
+              }
+              alt="User"
+            />
           </div>
-          <h2>Sarah Johnson</h2>
-          <p className="email">sarah.j@email.com</p>
+
+          <h2>{user?.fullName || "User"}</h2>
+          <p className="email">{user?.email || "example@email.com"}</p>
+
           <div className="premium">
-            <FaCrown className="icon" /> Premium Member
+            <FaCrown className="icon" /> Member
           </div>
         </div>
       </div>
@@ -73,15 +79,16 @@ const Profile = () => {
 
       {/* Lists */}
       <section className="list-section">
-        <div className="list-item">
-          <div className="left">
-            <div className="icon blue">
-              <FaEdit />
-            </div>
-            <p>Edit Profile</p>
-          </div>
-          <FaChevronRight className="arrow" />
-        </div>
+<div className="list-item" onClick={() => navigate("/profile/edit")}>
+  <div className="left">
+    <div className="icon blue">
+      <FaEdit />
+    </div>
+    <p>Edit Profile</p>
+  </div>
+  <FaChevronRight className="arrow" />
+</div>
+
 
         <div className="list-item">
           <div className="left">
