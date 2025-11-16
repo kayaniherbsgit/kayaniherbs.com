@@ -1,16 +1,17 @@
+// routes/authRoutes.js
 import express from "express";
 import multer from "multer";
 import { signup, login } from "../controllers/authController.js";
 
 const router = express.Router();
 
-// USING DISK STORAGE (Cloudinary will read the file)
+// Use disk storage for Render + Cloudinary
 const upload = multer({ dest: "uploads/" });
 
-// Signup → includes profile pic
+// Signup route with image
 router.post("/signup", upload.single("profileImage"), signup);
 
-// Login
+// Login route
 router.post("/login", login);
 
 export default router;

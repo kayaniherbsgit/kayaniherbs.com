@@ -1,10 +1,11 @@
-import User from "../models/User.js";
+// controllers/authController.js
+import { v2 as cloudinary } from "cloudinary";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import cloudinary from "cloudinary";
+import User from "../models/User.js";
 
 // CLOUDINARY CONFIG
-cloudinary.v2.config({
+cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
@@ -23,25 +24,31 @@ export const signup = async (req, res) => {
       password,
     } = req.body;
 
-    // Basic presence checks
+    // Required fields
     if (!fullName || !username || !email || !phone || !region || !password) {
-      return res.status(400).json({ success: false, message: "Missing required fields" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required fields" });
     }
 
-    // Uniqueness checks (email + username)
-    const existing = await User.findOne({ $or: [{ email }, { username }] });
-    if (existing) {
-      const which = existing.email === email ? "Email" : "Username";
-      return res.status(409).json({ success: false, message: `${which} already exists` });
+    // Check if username or email exists
+    const exists = await User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    if (exists) {
+      return res
+        .status(409)
+        .json({ success: false, message: "Email or username already exists" });
     }
 
-    // Upload image if exists
+    // Image upload (if exists)
     let profileImage = "";
     if (req.file) {
-      const uploaded = await cloudinary.v2.uploader.upload(req.file.path, {
+      const upload = await cloudinary.uploader.upload(req.file.path, {
         folder: "kayani_users",
       });
-      profileImage = uploaded.secure_url;
+      profileImage = upload.secure_url;
     }
 
     // Hash password
@@ -58,15 +65,19 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    // Hide password before sending out
     const { password: _pw, ...safeUser } = user.toObject();
 
-    return res
-      .status(201)
-      .json({ success: true, message: "Account created successfully", user: safeUser });
+    res.status(201).json({
+      success: true,
+      message: "Account created successfully",
+      user: safeUser,
+    });
   } catch (err) {
-    console.error("Signup error:", err);
-    return res.status(500).json({ success: false, message: "Signup error" });
+    console.error("Signup Error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Signup error",
+    });
   }
 };
 
@@ -75,38 +86,47 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Normalize
-    const normalizedEmail = (email || "").trim().toLowerCase();
+    const normalizedEmail = email.trim().toLowerCase();
+
     if (!normalizedEmail || !password) {
-      return res.status(400).json({ success: false, message: "Email and password are required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email & password required" });
     }
 
     const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
-      return res.status(401).json({ success: false, message: "Invalid email or password" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid) {
-      return res.status(401).json({ success: false, message: "Invalid email or password" });
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid credentials" });
     }
 
     const token = jwt.sign(
       { id: user._id },
-      process.env.JWT_SECRET || "dev-fallback-secret",
+      process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
     const { password: _pw, ...safeUser } = user.toObject();
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "Login successful",
       token,
       user: safeUser,
     });
   } catch (err) {
-    console.error("Login error:", err);
-    return res.status(500).json({ success: false, message: "Login error" });
+    console.error("Login Error:", err);
+    res.status(500).json({
+      success: false,
+      message: "Login error",
+    });
   }
 };
