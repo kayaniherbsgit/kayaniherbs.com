@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   FaUsers,
   FaBookOpen,
@@ -16,7 +18,10 @@ import {
 } from "react-icons/fa";
 
 import "./AdminStyles/AdminHome.css";
-const Admin = () => {
+
+const AdminHome = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="admin-page">
       {/* HEADER */}
@@ -75,7 +80,12 @@ const Admin = () => {
             <FaChevronRight className="arrow" />
           </div>
 
-          <div className="action-item">
+          {/* USERS — NOW NAVIGATES */}
+          <div
+            className="action-item"
+            onClick={() => navigate("/admin/users")}
+            style={{ cursor: "pointer" }}
+          >
             <div className="action-icon blue-light">
               <FaUsers />
             </div>
@@ -86,16 +96,21 @@ const Admin = () => {
             <FaChevronRight className="arrow" />
           </div>
 
-          <div className="action-item">
-            <div className="action-icon amber-light">
-              <FaUpload />
-            </div>
-            <div className="action-info">
-              <h3>Upload Lesson</h3>
-              <p>Add new content</p>
-            </div>
-            <FaChevronRight className="arrow" />
-          </div>
+<div
+  className="action-item"
+  onClick={() => navigate("/admin/lessons/upload")}
+  style={{ cursor: "pointer" }}
+>
+  <div className="action-icon amber-light">
+    <FaUpload />
+  </div>
+  <div className="action-info">
+    <h3>Upload Lesson</h3>
+    <p>Add new content</p>
+  </div>
+  <FaChevronRight className="arrow" />
+</div>
+
 
           <div className="action-item">
             <div className="action-icon purple-light">
@@ -174,30 +189,39 @@ const Admin = () => {
 
       <div className="admin-bottom-space"></div>
 
-      {/* Admin Bottom Nav */}
-<nav className="admin-bottom-nav">
-  <div className="nav-item active">
-    <FaChartPie />
-    <span>Dashboard</span>
-  </div>
+      {/* BOTTOM NAV */}
+      <nav className="admin-bottom-nav">
+        <div className="nav-item active">
+          <FaChartPie />
+          <span>Dashboard</span>
+        </div>
 
-  <div className="nav-item">
-    <FaUsers />
-    <span>Users</span>
-  </div>
+        <div
+          className="nav-item"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/users")}
+        >
+          <FaUsers />
+          <span>Users</span>
+        </div>
 
-  <div className="nav-item">
-    <FaBookOpen />
-    <span>Lessons</span>
-  </div>
+<div
+  className="nav-item"
+  onClick={() => navigate("/admin/lessons/upload")}
+  style={{ cursor: "pointer" }}
+>
+  <FaBookOpen />
+  <span>Lessons</span>
+</div>
 
-  <div className="nav-item logout">
-    <FaSignOutAlt />
-    <span>Logout</span>
-  </div>
-</nav>
+
+        <div className="nav-item logout">
+          <FaSignOutAlt />
+          <span>Logout</span>
+        </div>
+      </nav>
     </div>
   );
 };
 
-export default Admin;
+export default AdminHome;

@@ -1,0 +1,236 @@
+/* MAIN PAGE */
+.admin-page {
+  font-family: "Inter", sans-serif;
+  max-width: 420px;
+  margin: 0 auto;
+  background: #f3f4f6;
+  min-height: 100vh;
+  padding-bottom: 140px;
+}
+
+/* HEADER */
+.upload-header {
+  background: linear-gradient(90deg, #009641, #147d3a);
+  padding: 20px 20px 70px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 42px;
+  border-bottom-right-radius: 42px;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.header-center h1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header-center p {
+  font-size: 11px;
+  margin: 0;
+  opacity: 0.85;
+}
+
+.back-btn,
+.admin-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+}
+
+/* FLOATING WHITE CARD UNDER HEADER */
+.aul-wrap {
+  background: white;
+  margin-top: 25px;          /* pulls up but NOT too high */
+  padding: 20px;
+  border-radius: 22px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05),
+              0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* INPUTS */
+.label {
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.input,
+.textarea,
+.step-type,
+.step-label {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: white;
+  font-size: 14px;
+}
+
+.textarea {
+  resize: none;
+}
+
+/* GRID */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* THUMBNAIL */
+.thumb-preview img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/* STEPS HEADER */
+.steps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.btn-add {
+  background: #009641;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+/* STEP CARD */
+.step-card {
+  background: white;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  margin-top: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.step-body {
+  margin-top: 14px;
+}
+
+/* small labels */
+.slabel {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.btn-small {
+  margin-top: 8px;
+  border: 1px dashed #009641;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #009641;
+}
+
+.icon-btn.danger {
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #ffbcbc;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: #d53030;
+}
+
+/* PROGRESS BAR */
+.progress-bar {
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 10px;
+  margin-top: 15px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #009641, #147d3a);
+  transition: width 0.3s ease-in-out;
+}
+
+/* ACTION BUTTONS */
+.form-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: white;
+  border: 1px solid #d1d5db;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.btn-submit {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #009641, #147d3a);
+  color: white;
+  border: none;
+}
+
+/* BOTTOM NAV */
+.admin-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 420px;
+  margin: 0 auto;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #e5e7eb;
+  padding: 14px 0;
+}
+
+.nav-item {
+  text-align: center;
+  font-size: 11px;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-item.active {
+  color: #009641;
+  font-weight: 600;
+}
+
+.nav-item.logout {
+  color: #dc2626;
+}

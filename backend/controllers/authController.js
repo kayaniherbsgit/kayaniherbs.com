@@ -1,10 +1,9 @@
-// controllers/authController.js
 import { v2 as cloudinary } from "cloudinary";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-// CLOUDINARY CONFIG
+// CLOUDINARY CONFIG (make sure env vars exist)
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -24,7 +23,6 @@ export const signup = async (req, res) => {
       password,
     } = req.body;
 
-    // Required fields
     if (!fullName || !username || !email || !phone || !region || !password) {
       return res
         .status(400)
@@ -54,6 +52,7 @@ export const signup = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create user (isApproved defaults to false)
     const user = await User.create({
       fullName,
       username,
@@ -69,7 +68,7 @@ export const signup = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: "Account created successfully",
+      message: "Account created successfully. Wait for admin approval.",
       user: safeUser,
     });
   } catch (err) {
@@ -86,19 +85,27 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const normalizedEmail = email.trim().toLowerCase();
-
-    if (!normalizedEmail || !password) {
+    if (!email || !password) {
       return res
         .status(400)
         .json({ success: false, message: "Email & password required" });
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
     const user = await User.findOne({ email: normalizedEmail });
+
     if (!user) {
       return res
         .status(401)
         .json({ success: false, message: "Invalid credentials" });
+    }
+
+    // BLOCK login if not approved
+    if (!user.isApproved) {
+      return res.status(401).json({
+        success: false,
+        message: "Your account is not approved yet. Please wait for admin approval.",
+      });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
@@ -108,11 +115,9 @@ export const login = async (req, res) => {
         .json({ success: false, message: "Invalid credentials" });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
     const { password: _pw, ...safeUser } = user.toObject();
 

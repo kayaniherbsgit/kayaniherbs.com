@@ -23,8 +23,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));
 
-    setUser(userData);          // ⭐ updates user instantly
-    setIsAuthenticated(true);    // ⭐ triggers rerender
+    setUser(userData);
+    setIsAuthenticated(true);
   };
 
   const logout = () => {

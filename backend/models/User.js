@@ -41,6 +41,12 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+
+    // NEW: Admin approval flag
+    isApproved: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
